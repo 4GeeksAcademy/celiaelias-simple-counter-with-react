@@ -1,26 +1,37 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import "../../styles/index.css";
+import "../icons";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
-//create your first component
-const Home = () => {
+function SimpleCounter() {
+	const [counter, setCounter] = React.useState(0);
+  
+	React.useEffect(() => {
+	  const intervalId = setInterval(() => {
+		setCounter((prevCounter) => prevCounter + 1);
+	  }, 1000);
+  
+	  return () => clearInterval(intervalId);
+	}, []);
+  
+	const digitFour = Math.floor((counter / 1000) % 10);
+	const digitThree = Math.floor((counter / 100) % 10);
+	const digitTwo = Math.floor((counter / 10) % 10);
+	const digitOne = Math.floor(counter % 10);
+  
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
+	  <React.Fragment>
+		  <div className="bigCounter">
+			  <div className="clock">
+				  <FontAwesomeIcon icon={['far', 'clock']} /> {/* Usa el icono faClock */}
+			  </div>
+			  <div className="four">{digitFour}</div>
+			  <div className="three">{digitThree}</div>
+			  <div className="two">{digitTwo}</div>
+			  <div className="one">{digitOne}</div>
+		  </div>
+	  </React.Fragment>
 	);
-};
+  }
 
-export default Home;
+export default SimpleCounter;
